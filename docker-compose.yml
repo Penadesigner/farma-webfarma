@@ -1,0 +1,10 @@
+services:
+  farmaciaaiangular:
+    image: farmaciaaiangular
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4001:4000

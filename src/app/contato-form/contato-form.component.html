@@ -1,0 +1,107 @@
+<section id="contato">
+    <div class="container py-3">
+        <form (ngSubmit)="onSubmit(contatoForm, modalContent)" #contatoForm="ngForm">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Nome</label>
+                    <input class="form-control input-box" id="name" placeholder="Seu Nome" required
+                        [(ngModel)]="model.name" name="name" type="text" #name="ngModel">
+                    <div [hidden]="name.valid || name.pristine" class="text-danger small">
+                        Nome é obrigatório
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>E-mail</label>
+                    <input class="form-control input-box" id="email" type="email" name="email" email
+                        placeholder="Seu E-mail" required [(ngModel)]="model.email" #email="ngModel">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger small">
+                        <div *ngIf="email.errors.required">
+                            E-mail é obrigatório
+                        </div>
+                        <div *ngIf="email.errors.email">
+                            E-mail inválido
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Estado</label>
+                    <input class="form-control input-box" id="state" type="state" name="state" required
+                        [(ngModel)]="model.state" #state="ngModel" placeholder="Estado">
+                    <div *ngIf="state.invalid && (state.dirty || state.touched)" class="text-danger small">
+                        Estado é obrigatório
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Telefone</label>
+                    <input class="form-control input-box" id="phone" type="tel" name="phone" required
+                        mask="(00) 00000-0000" [dropSpecialCharacters]="false" [(ngModel)]="model.phone"
+                        #phone="ngModel" [validation]="false" pattern="\(\d{2}\) \d{5}-\d{3,4}"
+                        placeholder="(xx) xxxxx-xxxx">
+                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="text-danger small">
+                        <div *ngIf="phone.errors.required">
+                            Telefone é obrigatório
+                        </div>
+                        <div *ngIf="phone.errors.pattern">
+                            Telefone inválido - (xx) xxxxx-xxxx
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label>Farmácia (Caso queira anunciar)</label>
+                    <input class="form-control input-box" id="advertiser" type="advertiser" name="advertiser"
+                        [(ngModel)]="model.advertiser" placeholder="Nome da farmácia (Caso queira anunciar)">
+                </div>
+                <div class="col-md-12 form-group">
+                    <label>Assunto</label>
+                    <select class="form-control input-box" id="subject" type="text" name="subject"
+                        [(ngModel)]="model.subject" #subject="ngModel" required>
+                        <option value="Cadastrar minha farmácia">Cadastrar minha farmácia</option>
+                        <option value="Dúvidas sobre o FarmáciaAí">Dúvidas sobre o FarmáciaAí</option>
+                        <option value="Falar com uma farmácia">Falar com uma farmácia</option>
+                    </select>
+                    <div *ngIf="subject.invalid && (subject.dirty || subject.touched)" class="text-danger small">
+                        O Assunto é obrigatório<br> 
+                        O FarmáciaAí não envia sua mensagem para as farmácias.
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label>Mensagem</label>
+                    <textarea class="form-control textarea-box" id="message" name="message" rows="8" required
+                        [(ngModel)]="model.message" #message="ngModel" placeholder="Mensagem"></textarea>
+                    <div *ngIf="message.invalid && (message.dirty || message.touched)" class="text-danger small">
+                        Mensagem é obrigatória
+                    </div>
+                </div>
+                <div class="col-md-12 d-flex justify-content-center">
+                    <!-- [disabled]="loading || !contatoForm.form.valid"  -->
+                    <button class="btn btn-my-orange p-3" id="submit" type="submit" name="Enviar"
+                        [disabled]="loading || !contatoForm.form.valid" data-style="expand-left">Enviar
+                        Mensagem</button>
+                </div>
+                <ng-template #modalContent let-modal>
+                    <div ngbAutofocus class="modal-body text-center text-white">
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="text-white">Obrigado pela sua mensagem!</h5>
+                        Entraremos em contato em breve.
+                    </div>
+                </ng-template>
+            </div>
+        </form><!-- /END CONTACT BOX-->
+        <!-- LOGO-->
+        <div class="row justify-content-center mt-5">
+            <div>
+                <img src="/assets/img/logo-black_ecommerce.png" alt="LOGO">
+            </div>
+            <div class="w-100"></div>
+            <div>
+                <span class="text-my-orange">
+                    <a href="https://www.facebook.com/webfarmas">
+                        <i class="fab fa-facebook-square h2 mx-1"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>

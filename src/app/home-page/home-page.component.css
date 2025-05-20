@@ -1,0 +1,22 @@
+:host ::ng-deep ngb-typeahead-window .dropdown-item .small {
+    color: var(--my-light);
+}
+
+:host ::ng-deep ngb-typeahead-window .dropdown-item i {
+    color: var(--my-lgreen);
+}
+
+:host ::ng-deep ngb-typeahead-window .dropdown-item.active i, :host ::ng-deep ngb-typeahead-window .dropdown-item.active .small {
+    color: var(--white)!important;
+}
+
+:host ::ng-deep ngb-typeahead-window.dropdown-menu {
+    position: absolute;
+    width: calc(100%);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+:host ::ng-deep ngb-typeahead-window .dropdown-item{
+    white-space: normal !important;
+}

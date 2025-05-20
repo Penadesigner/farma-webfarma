@@ -1,0 +1,39 @@
+<div class="overflow-auto">
+    <div class="d-flex flex-{{direction}}">
+        <ng-container *ngFor="let product of products">
+            <div class="{{cardCssClass}}" (click)="onSelectProduct(product)">
+                <div class="d-flex flex-column grid-item h-100 justify-content-between text-center">
+                    <div class="align-items-center d-flex flex-column w-50 justify-content-center align-self-center">
+                        <img [src]="'https://images.webfarmas.com.br/'+ product.ean + '.jpg'" alt="Grid Image" class="p-1">
+                    </div>
+                    <h6>{{product.nomeCurto | titlecase}}</h6>
+                    <small>
+                        <p class="">{{product.nomeCompleto.replace(product.nomeCurto,'')}}</p>
+                    </small>
+                    <!-- <ul class="tags">
+                <li>Categoria 1</li>
+                <li>Categoria 1</li>
+                <li>Categoria 1</li>
+            </ul> -->
+                    <ul class="features text-lg-left mt-2 small">
+                        <li *ngIf="product.detalhes.principio"><i class="fal fa-flask-potion text-my-lgreen mr-1"></i>
+                            {{product.detalhes.principio | titlecase}}
+                        </li>
+                        <li *ngIf="product.marca"><i
+                                class="fal fa-industry-alt text-my-lgreen mr-1"></i>{{product.marca | titlecase}}
+                        </li>
+                    </ul>
+                    <div>
+                        <div *ngIf="product.avgPrice" class="price-box mb-3">
+                            <p>Preço médio de <span>R$ {{product.avgPrice | number : '1.2-2'}}</span></p>
+                        </div>
+                        <a class="py-3"
+                            [href]="'/detalhes/' + prepareUriPipe.transform(product.nomeCompleto) +'/'+ product.ean">
+                            Comparar Preços
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

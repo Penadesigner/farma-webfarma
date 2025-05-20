@@ -1,0 +1,45 @@
+<div class="container" *ngIf="stores">
+    <div class="row">
+        <div class="p-3 col-12">
+            <ng-container *ngFor="let item of stores.result">
+                <a class="text-dark" href="{{[['/farmacias-e-drogarias', 
+                            item.address.state?.toUpperCase(), 
+                            item.address.locality?.toUpperCase(),item.address.neighbourhood?.toUpperCase(), 
+                            item.name?.toUpperCase().replace('/',''),
+                            item.cnpj].join('/'), pagQueryParams] | prepareUri : 'keepSlashes'}}">
+                    <div class="row mb-3 px-3">
+                        <div class="col-9 col-lg-10 p-0">
+                            <div class="d-flex flex-row small">
+                                <div class="pr-1 py-4 bg-my-light mr-1"></div>
+                                <div class="bg-light card-footer py-1 pl-1 pr-3 w-100">
+                                    <h4 class="mt-0 mb-1 h6">{{item.name | titlecase }}</h4>
+                                    <p>{{item.address.street | uppercase}} -
+                                        {{item.address.neighbourhood ? item.address.neighbourhood+',':null | uppercase}}
+                                        {{item.address.locality | uppercase}} - {{item.address.state | uppercase}}</p>
+                                    <p> {{item.distance | number: '1.2-2'}} Km de distância {{placeName}}
+                                        <!-- {{isUserAddressInParm? 
+                                        ' do seu endereço' :' do centro de '+ (address.neighbourhood || address.locality || address.state)}} -->
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 col-lg-2 p-0">
+                            <button class="btn btn-my-light text-white btn-sm h-100 w-100 p-0 gtm-ver-detalhes">VER
+                                DETALHES</button>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+            <app-pagination [page]="page" [count]="stores.count" [fragment]="pagFragment" [limit]="stores.limit"
+                [queryParams]="pagQueryParams" [mode]="pagMode">
+            </app-pagination>
+        </div>
+        <!-- <div class="col-12 col-lg-4 p-3">
+            <a target="_blank" class="gtm-clude-ad" rel="nofollow"
+            href="https://beneficios.clude.com.br/medico-na-palma-da-mao?utm_source=indicacao&utm_medium=banner&utm_campaign=farmaciaai&utm_content=b05">
+                <img src="	
+                https://clude.com.br/img/ads/b05.jpg">
+            </a>
+        </div> -->
+    </div>
+</div>

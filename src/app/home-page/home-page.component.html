@@ -1,0 +1,92 @@
+<section id="banner">
+    <div class="container">
+        <div class="row">
+            <div class="my-3 my-lg-5 w-100"></div>
+            <div class="col-lg-9 m-auto text-center banner-text">
+                <h2 class="text-white font-weight-bold family-bold">
+                    <span class="d-inline-block">Compre e compare preços</span>
+                    <span class="d-inline-block">&nbsp;nas farmácias de sua região</span>
+                </h2>
+                <h5 class="subtitle mt-15 pt-3 pb-5">Receba seus produtos em minutos.</h5>
+                <ng-container *ngIf="address">
+                    <form (submit)="onSubmit()">
+                        <div #form class="input-item">
+                            <input id="input-keywords" name="keywords" type="text" [ngbTypeahead]="search"
+                                (selectItem)="onSelectItem($event)" [focusFirst]="false" [inputFormatter]="formatter"
+                                [(ngModel)]="model" [resultTemplate]="rt" placeholder="Digite o Produto"
+                                class="form-control data-hj-whitelist" (click)="onFocusSearch()" placement="bottom"
+                                tooltipClass="my-tooltip"
+                                [ngbTooltip]="tooltipTemplate"
+                                triggers="manual" #inputTooltip="ngbTooltip">
+                            <button id="button-search" type="submit">
+                                <i class="fal fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="alert-danger form-control-plaintext text-danger" [class.invisible]="!errorMsg"
+                        style="height: 4em;">
+                        {{errorMsg}}
+                    </div>
+                    <ng-template #tooltipTemplate>
+                        <div class="tooltip-inner">
+                            <i class="fa fa-lightbulb-on fal text-warning"></i>
+                            Digite o produto para <b>pesquisar preços</b> ou <b>comprar online</b>
+                        </div>
+                    </ng-template>
+                    <ng-template #rt let-r="result" let-t="term">
+                        <!-- <div class="row">
+                            <button (click)="form.submit()" >Ver todos</button>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-2 col-md-2 col-lg-2 col-xl-1 p-1">
+                                <img [src]="'https://images.webfarmas.com.br/'+ r['ean'] + '.jpg'"
+                                    class="img-thumbnail img-fluid">
+                            </div>
+                            <div class="col-10 col-md-10 col-lg-10 col-xl-11 pb-2">
+                                <p *ngIf="r.nomeCurto" class="text-truncate">
+                                    <ngb-highlight result="{{r.nomeCurto | uppercase}}" [term]="t.split(' ')">
+                                    </ngb-highlight>
+                                </p>
+                                <p>
+                                    <ngb-highlight result="{{r.nomeCompleto.replace(r.nomeCurto,'') | uppercase}}"
+                                        [term]="t.split(' ')">
+                                    </ngb-highlight>
+                                </p>
+                                <p class="small text-truncate">
+                                    <i *ngIf="r.nomeCurto && r.marca" class="fal fa-flask mr-1"></i>
+                                    <i *ngIf="!r.nomeCurto && r.marca" class="fal fa-industry-alt mr-1"></i>
+                                    <!-- <i *ngIf="!r.nomeCurto && r.marca" class="fal fa-spray-can mr-1"></i> -->
+                                    {{r.marca}}
+                                </p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <div class="banner-btn">
+                    <a class="text-white gtm-digitar-cep" (click)="onClickMyLocation()">
+                        <img src="assets/img/location.svg">
+                        {{address? 'Mudar Localização':'Digitar meu CEP' }}</a>
+                </div>
+                <img src="assets/img/OBJECTS.svg" alt="Banner Person" class="banner-person d-none d-lg-block">
+            </div>
+        </div>
+        <div class="py-0 py-lg-3 py-xl-4 w-100"></div>
+    </div>
+    <div class="py-0 py-lg-5 w-100"></div>
+    <div class="py-5"></div>
+    <div *ngIf="!address" class="d-none d-sm-block py-1 py-lg-4"></div>
+</section>
+<app-category-list></app-category-list>
+
+<!-- <section class="py-5 px-3" id="cadastre-sua-farmacia">
+    <div class="text-center">
+        <h2 class="text-white">Gostaria de
+            vender online na sua regi&atilde;o? <br>Com o<a href="https://www.webfarmas.com" target="_blank"><img
+                    class="responsive-img" src="https://www.webfarmas.com/images/logo.png"
+                    style="max-width:30%!important" alt="LOGO"></a> colocamos <span class="d-inline-block">sua
+                farmácia online em
+                minutos.</span>
+            <span class="d-block mt-3" style="font-weight:bold">Cadastre <a [routerLink]="[ 'contato']">aqui</a></span>
+        </h2>
+    </div>
+</section> -->

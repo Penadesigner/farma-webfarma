@@ -1,0 +1,13 @@
+<app-json-ld [schema]="items | jsonLD:'BreadcrumbList'"></app-json-ld>
+<div class="page-path pb-2 pb-sm-4 pl-4 small">
+    <a href="/">Home</a>
+    <ng-container *ngFor="let item of items">
+        &nbsp;<i class="fas fa-chevron-right"></i>&nbsp;
+        <ng-container *ngIf="item[1]; else elseTemplate">
+            <a href="{{item[1] | prepareUri : 'keepSlashes'}}">{{item[0]}}</a>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <span>{{item[0]}}</span>
+        </ng-template>
+    </ng-container>
+</div>

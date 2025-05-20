@@ -1,0 +1,328 @@
+<app-json-ld [schema]="product | jsonLD"></app-json-ld>
+<section id="product-details" class="pt-2 pt-sm-3">
+    <app-breadcrumb [items]="[['Resultado da Busca', null]]"></app-breadcrumb>
+    <!-- <div class="page-path pb-2 pb-sm-4 pl-4 small">
+        <a href="/">Home</a>&nbsp;<i class="fas fa-chevron-right"></i>&nbsp;<span>Resultado da Busca</span>
+    </div> -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-4 col-12 vh-40" (click)="scrollToOffers()">
+                <div class="align-items-center d-flex flex-column h-100 justify-content-center product-details-img">
+                    <img [src]="'https://images.webfarmas.com.br/'+ product.ean + '.jpg'" alt="Large Product Image"
+                        class="vh-40 p-1">
+                    <!-- <a href="#"><img src="assets/img/_Farmas Cefas - Cart.svg" alt="Cart Image"></a> -->
+                </div>
+            </div>
+            <div class="col-lg-7 col-md 6 col-12">
+                <div class="product-details-desp">
+                    <h2 *ngIf="product.nomeCurto" class="my-3">{{product.nomeCurto | titlecase}}</h2>
+                    <h2 *ngIf="!product.nomeCurto" class="my-3">{{product.nomeCompleto | titlecase}}</h2>
+                    <h6 *ngIf="product.nomeCurto" class="text-my-light mb-2">
+                        {{product.nomeCompleto.replace(product.nomeCurto,'')}}</h6>
+                    <!-- <ul class="tags">
+                        <li>Categoria 1</li>
+                        <li>Categoria 1</li>
+                        <li>Categoria 1</li>
+                    </ul> -->
+                    <ul class="features small">
+                        <li *ngIf="product.detalhes.principio" class="mr-3"><i
+                                class="h5 fal fa-flask-potion text-my-lgreen mr-1"></i>
+                            {{product.detalhes.principio | titlecase}}
+                        </li>
+                        <li *ngIf="product.marca" class="mr-3"><i
+                                class="h5 fal fa-industry-alt text-my-lgreen mr-1"></i>
+                            {{product.marca | titlecase}}
+                        </li>
+                    </ul>
+                    <div class="price-box py-2">
+                        <h3>
+                            Preço Médio:
+                            <ng-container *ngIf="product.avgPrice; else elseTemplate">
+                                <span>R$ {{product.avgPrice | number : '1.2-2' }}</span>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <span>--</span>
+                            </ng-template>
+                        </h3>
+                        <ng-container *ngIf="false" [ngPlural]="product.numAdv">
+                            <p class="mt-2">
+                                <ng-template ngPluralCase="=1">Disponível em
+                                    <span class="family-bold">1 Farmácia</span>
+                                </ng-template>
+                                <ng-template ngPluralCase="other">Disponível em
+                                    <span class="family-bold">{{product.numAdv}} Farmácias</span>
+                                </ng-template>
+                                próximas ao seu endereço
+                            </p>
+                        </ng-container>
+                    </div>
+                    <div class="row">
+                        <div *ngIf="product.detalhes.registro" class="col-12 col-md-3 p-1">
+                            <a class="btn btn-my-lgreen family-bold rounded-pill py-3 w-100"
+                                [routerLink]="['/bula', product.nomeCurto+'-'+product.marca | prepareUri, product.detalhes.registro.substring(0,9)]">
+                                <i class="fal fa-file-medical mr-1"></i>
+                                BULA
+                            </a>
+                        </div>
+                        <div class="col p-1">
+                            <a [routerLink]="['./']" (click)="onClickVerOfertas()"
+                                class="btn btn-my-orange family-bold rounded-pill py-3 w-100">VER OFERTAS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-xl-5">
+            <div id="ofertas" class="col-lg-12 text-center middle-text pt-3">
+                <i class="fal fa-shipping-fast h3 text-my-lgreen"></i>
+                <h3 class="text-my-lgreen family-bold font-italic mb-2">
+                    Farmácias online</h3>
+            </div>
+            <div *ngIf="loaded && address && noOffers && !priceRequestStore"
+                class="col-lg-12 text-center middle-text py-2">
+                <p class="text-my-blue alert-my-blue p-3">
+                    <ng-container *ngIf="noOffers">
+                        <span class="d-block">Produto disponível apenas para compra por telefone</span>
+                        <button (click)="scrollToStores()" class="btn btn-my-blue mt-2 gtm-verFarmacias">VER
+                            FARMÁCIAS</button>
+                    </ng-container>
+                    <!-- <ng-template #elseTemplate>
+                        <ng-container [ngPlural]="product.numAdv">
+                            <ng-template ngPluralCase="=0">
+                                Produto indisponível
+                            </ng-template>
+                            <ng-template ngPluralCase="=1">Encontrada
+                                <span class="family-bold">1 farmácia</span>
+                                que entrega
+                            </ng-template>
+                            <ng-template ngPluralCase="other">Encontradas
+                                <span class="family-bold">{{product.numAdv}} farmácias</span>
+                                que entregam
+                            </ng-template>
+                        </ng-container>
+                        no seu endereço
+                    </ng-template> -->
+                </p>
+            </div>
+            <!-- <div *ngIf="noOffers" class="col-12">
+                <div class="family-bold text-center p-3">
+                    <svg viewBox="0 0 152.791 184.486" style="fill: currentColor" class="col-4 col-md-3 mb-3">
+                        <use xlink:href="assets/img/sad-man.svg#root"></use>
+                    </svg>
+                    <p class="small">
+                        Produto indisponível no seu endereço
+                    </p>
+                    <a [routerLink]="['/']"
+                        class="btn btn-my-orange family-bold rounded-pill p-3 col-4 col-md-3 mb-3">NOVA BUSCA</a>
+                </div>
+            </div> -->
+            <div *ngIf="false" class="col-12 px-1" (click)="onSelectOffer()">
+                <div class="product-details-item px-4 py-4 mb-3 border border-my-orange">
+                    <div class="row px-1 px-sm-5 row">
+                        <div class="d-xl-none m-0 row small">
+                            <div class="col-3 p-0">
+                                <img src="assets/img/logo-Gradient-Orange.png" class="img-fluid">
+                            </div>
+                            <div class="col-6 p-0">
+                                <h5 class="text-dark family-bold text-center">Sua farmácia aqui!</h5>
+                            </div>
+                            <div class="col-12 py-1">
+                                <h6 class="text-my-dark family-bold text-center">Traga sua farmácia para vender online
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="align-items-center col-xl-2 d-none d-xl-flex p-0">
+                            <img src="assets/img/logo-Gradient-Orange.png" class="img-fluid">
+                        </div>
+                        <div class="col-xl-7">
+                            <h4 class="text-my-orange text-center family-bold d-none d-xl-block">Sua farmácia pode
+                                aparecer aqui!</h4>
+                            <h6 class="text-center text-dark d-none d-xl-block">Traga sua farmácia para vender online
+                            </h6>
+                        </div>
+                        <div class="col-xl-3 d-flex align-items-center">
+                            <a [routerLink]="[ '/contato']"
+                                class="btn btn-my-lorange family-bold rounded-pill py-3 w-100">ANUNCIAR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="loaded && address && priceRequestStore" class="col-12 px-1 gtm-monte-seu-carrinho"
+                (click)="onSelectOffer(priceRequestStore)">
+                <div class="product-details-item px-4 py-4 mb-3">
+                    <div class="row px-1 px-sm-5 row">
+                        <div class="d-xl-none m-0 row small">
+                            <div class="col-3 p-0">
+                                <img src="assets/img/logo-Gradient-Orange.png" class="img-fluid">
+                            </div>
+                            <div class="col-6 p-0">
+                                <h6 class="text-my-light family-bold text-center">Monte seu Carrinho</h6>
+                            </div>
+                            <div class="align-items-end col-3 d-flex flex-column pl-0 pr-1 w-100">
+                                <div>
+                                    <span class="text-my-orange family-bold h6 m-0">
+                                        Em média:
+                                    </span>
+                                </div>
+                                <span class="text-my-lgreen family-bold h6 m-0">R$
+                                    {{priceRequestStore.price| number : '1.2-2' }}</span>
+                            </div>
+                        </div>
+                        <div class="align-items-center col-xl-2 d-none d-xl-flex p-0">
+                            <img src="assets/img/logo-Gradient-Orange.png" class="img-fluid">
+                        </div>
+                        <div class="col-xl-5">
+                            <h4 class="text-my-light family-bold d-none d-xl-block">Monte seu Carrinho!</h4>
+                            <div class="row p-3 ">
+                                <h5>Peça nas melhores farmácias online de uma só vez!</h5>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 d-none d-xl-flex flex-column align-self-center p-1">
+                            <div>
+                                <span class="text-my-orange family-bold h6 m-0">
+                                    Em média:
+                                </span>
+                            </div>
+                            <span class="text-my-lgreen family-bold h2 m-0">R$
+                                {{priceRequestStore.price | number : '1.2-2' }}</span>
+                        </div>
+                        <div class="col-xl-3 d-flex align-items-center">
+                            <a [routerLink]="[ '/farmacia', priceRequestStore.nameUri ]"
+                                [queryParams]="{ean:product.ean, cep:address.zipcode.replace('-','')}"
+                                class="btn btn-my-lgreen family-bold rounded-pill py-3 w-100">ADICIONAR <i
+                                    class="fas fa-shopping-cart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngFor="let offer of offers">
+                <div class="col-12 px-1 gtm-ir-a-loja" (click)="onSelectOffer(offer)">
+                    <div class="product-details-item px-4 py-4 mb-3">
+                        <div class="row px-1 px-sm-5 row">
+                            <div class="d-xl-none m-0 row small">
+                                <div class="col-3 p-0">
+                                    <img [src]="offer.netGroup.urlLogo" [alt]="offer.advertiser.name" class="img-fluid">
+                                </div>
+                                <div class="col-6 p-0">
+                                    <h6 class="text-my-light family-bold text-center">{{offer.advertiser.name}}</h6>
+                                </div>
+                                <div class="align-items-end col-3 d-flex flex-column pl-0 pr-1 w-100">
+                                    <div>
+                                        <span class="text-my-orange family-bold h6 m-0"><del>R$
+                                                {{(offer.price * 1.25) | number: '1.2-2'}}</del></span>
+                                    </div>
+                                    <span class="text-my-lgreen family-bold h6 m-0">R$
+                                        {{offer.price | number: '1.2-2'}}</span>
+                                </div>
+                            </div>
+                            <div class="align-items-center col-xl-2 d-none d-xl-flex p-0">
+                                <img [src]="offer.netGroup.urlLogo" [alt]="offer.advertiser.name" class="img-fluid">
+                            </div>
+                            <div class="col-xl-5">
+                                <h4 class="text-my-light family-bold d-none d-xl-block">{{offer.advertiser.name}}</h4>
+                                <div class="small row py-3 text-my-lgreen">
+                                    <div class="col-3 px-0 py-1">
+                                        <img src="assets/img/bottom-features-1.svg" class="col-2 col-xl-auto mr-1 p-0"
+                                            alt="Features Icon">{{offer.distance | number: '1.2-2'}} Km
+                                    </div>
+                                    <div class="col-6 text-center px-0 py-1">
+                                        <img src="assets/img/bottom-features-2.svg" class="col-1 col-xl-auto mr-1 p-0"
+                                            alt="Features Icon">
+                                        <span *ngIf="offer.advertiser.deliveryCost && offer.advertiser.deliveryCost > 0"
+                                            class="d-inline-block">
+                                            Frete R$
+                                            {{offer.advertiser.deliveryCost.replace(',','.') | number: '1.2-2'}}
+                                        </span>
+                                        <span
+                                            *ngIf="!offer.advertiser.deliveryCost || offer.advertiser.deliveryCost == 0"
+                                            class="d-inline-block">
+                                            Frete Grátis
+                                        </span>
+                                        <span
+                                            *ngIf="offer.advertiser.deliveryFreePrice && offer.advertiser.deliveryFreePrice > 0"
+                                            class="d-inline-block">
+                                            (Grátis a partir R$
+                                            {{offer.advertiser.deliveryFreePrice | number: '1.2-2'}})
+                                        </span>
+                                    </div>
+                                    <div class="col-3 text-right px-0 py-1">
+                                        <img src="assets/img/bottom-features-3.svg" class="col-2 col-xl-auto mr-1 p-0"
+                                            alt="Features Icon">{{offer.advertiser.deliveryTime}} min
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 d-none d-xl-flex flex-column align-self-center p-1">
+                                <div>
+                                    <span class="text-my-orange family-bold h6 m-0"><del>R$
+                                            {{(offer.price * 1.25) | number: '1.2-2'}}</del></span>
+                                </div>
+                                <span class="text-my-lgreen family-bold h2 m-0">R$
+                                    {{offer.price | number: '1.2-2'}}</span>
+                            </div>
+                            <div class="col-xl-3 d-flex align-items-center">
+                                <a [routerLink]="[ '/farmacia', offer.nameUri ]"
+                                    [queryParams]="{ean:product.ean, cep:address.zipcode.replace('-','')}"
+                                    class="btn btn-my-lorange family-bold rounded-pill py-3 w-100">COMPRAR</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <div *ngIf="loaded && address && priceRequestStore"  class="col-12 px-1">
+                <div class="product-details-item px-2 py-4 mb-3">
+                    <button (click)="onSelectOffer(priceRequestStore)"
+                        class="btn btn-block btn-my-green rounded-pill mb-1 gtm-peca-online-wpp">PEÇA ONLINE <i
+                            class="fa-whatsapp fab"></i></button>
+                    <app-stores-rank-table class="w-100 shadow-sm " [stores]="rankingStores"></app-stores-rank-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="stores" *ngIf="address && stores && stores.result && stores.result.length">
+    <div class="container">
+        <div class="row mt-xl-5">
+            <div class="col-lg-12 text-center middle-text p-3">
+                <h3 class="text-my-light family-bold font-italic">
+                    Farmácias próximas que ainda não vendem online</h3>
+            </div>
+        </div>
+    </div>
+    <app-stores-list [page]="page" [stores]="stores" placeName="do seu endereço" pagMode="queryParams"
+        pagFragment="stores">
+    </app-stores-list>
+</section>
+
+<section id="pro-de-grid">
+    <div class="container">
+        <div class="row mt-xl-5">
+            <div class="col-lg-12 text-center middle-text p-3">
+                <h3 *ngIf="relatedProducts?.length > 0" class="text-my-light family-bold font-italic">
+                    Produtos relacionados</h3>
+            </div>
+        </div>
+        <app-product-card [products]="relatedProducts"></app-product-card>
+    </div>
+
+    <div class="col-lg-12 text-center middle-text p-3">
+        <h3 class="text-my-light family-bold font-italic">
+            Informações do Produto</h3>
+    </div>
+    <div>
+        <div *ngIf="product.descricao" class="p-3 ">
+            <p>
+                {{product.descricao | removeUnknownChars}}
+            </p>
+        </div>
+        <ul class="bottom-features px-3">
+            <li *ngIf="product.ean" class="mr-3">
+                <b>EAN</b> {{product.ean}}
+            </li>
+            <li *ngIf="product.detalhes.registro" class="mr-3">
+                <b>Reg. Anvisa</b> {{product.detalhes.registro}}
+            </li>
+        </ul>
+    </div>
+</section>
+
+<app-category-list [isFloating]="false"></app-category-list>

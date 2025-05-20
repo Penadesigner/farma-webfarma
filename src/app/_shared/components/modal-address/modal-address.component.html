@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h4 class="modal-title text-white font-weight-bold">Onde você quer receber seu pedido?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body text-white">
+    <form #f="ngForm" autocomplete="off">
+        <div class="form-group">
+            <label for="cep">CEP</label>
+            <div class="input-group">
+                <input id="cep" name="cep" ngbAutofocus class="form-control data-hj-whitelist"
+                    placeholder="Digite seu CEP" mask="00000-000" [(ngModel)]="cep" #name="ngModel" type="tel"
+                    [clearIfNotMatch]="true" [validation]="true" (keyup)="onKeyupCep()">
+            </div>
+            <div class="alert-danger form-control-plaintext text-danger" [class.invisible]="!errorMsg">
+                {{errorMsg}}
+            </div>
+        </div>
+    </form>
+    <div class="align-items-center d-flex justify-content-between">
+        <div *ngIf="address" class="text-truncate">
+            {{[address.street, address.neighbourhood, address.locality].join(', ') + ' - ' + address.state}}
+        </div>
+        <div *ngIf="loading">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer text-white">
+    <button type="button" class="btn btn-my-white rounded-pill mx-auto btn-lg px-5 gtm-mudou-cep" [disabled]="!loaded"
+        appTrackable appTrackType="USER" appTrackName="mudou-cep" [appTrackData]="address"
+        [class.invisible]="!loaded" (click)="submitAddress()">OK</button>
+</div>

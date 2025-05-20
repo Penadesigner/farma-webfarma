@@ -1,0 +1,220 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3 mt-3 p-3">
+                <a [routerLink]="['/']" fragment="input-keywords" class="text-my-body">
+                    <div class="media">
+                        <i class="fa fa-4x fa-shipping-fast mr-3" alt="..."></i>
+                        <div class="media-body">
+                            <h6 class="family-bold h6 text-my-orange">Compre Online</h6>
+                            <p class="small">Nas farmácias da sua região e receba em minutos</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 mt-3 p-3">
+                <a [routerLink]="['/farmacias-e-drogarias']" class="text-my-body">
+                    <div class="media">
+                        <i class="fa fa-4x fa-map-marked-alt mr-3" alt="..."></i>
+                        <div class="media-body">
+                            <h6 class="family-bold h6 text-my-orange">Farmácias próximas</h6>
+                            <p class="small">Encontre todas as informações das farmácias perto de você</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 mt-3 p-3">
+                <a [routerLink]="['/']" fragment="input-keywords" class="text-my-body">
+                    <div class="media">
+                        <i class="fa fa-4x fa-search-dollar mr-3" alt="..."></i>
+                        <div class="media-body">
+                            <h6 class="family-bold h6 text-my-orange">Compare Preços</h6>
+                            <p class="small">Saiba se está pagando mais caro pelo preço médio do medicamento</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 mt-3 p-3">
+                <a [routerLink]="['/medicamentos-de-A-a-Z']" class="text-my-body">
+                    <div class="media">
+                        <i class="fa fa-4x fa-pills mr-3" alt="..."></i>
+                        <div class="media-body">
+                            <h6 class="family-bold h6 text-my-orange">Medicamentos</h6>
+                            <p class="small">Bulas, detalhes, preço médio e muito mais sobre medicamentos</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="banner2" class="mt-5 py-5">
+    <div class="container">
+        <a [routerLink]="[ '/']">
+            <div class="row">
+                <div class="col-lg-9 m-auto text-center banner-text">
+                    <img src="assets/img/logo-white.svg" alt="Logo">
+                    <h1>Compre online nas farmácias de sua região.</h1>
+                    <p class="text-white">Receba seus produtos em minutos</p>
+                    <!-- <form>
+                    <div class="input-item">
+                        <input type="text" placeholder="Digite o seu CEP..." class="form-control">
+                        <button type="search"><i class="fal fa-search"></i></button>
+                    </div>
+                </form> -->
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row mt-xl-5">
+            <div class="col-lg-12 text-center">
+                <h3 class="p-2">
+                    Encontre farmácias próximas em todo o Brasil
+                </h3>
+            </div>
+            <div class="row p-3 m-0">
+                <ng-container *ngFor="let state of states; let i = index">
+                    <!-- [class.d-none]="i >= 12"  -->
+                    <div class="col-12 col-md-6 col-lg-4 mb-1" [class.more-items]="i >= 12">
+                        <a [href]="['/farmacias-e-drogarias', state[1],'pagina',1 ].join('/')">Farmácias online
+                            {{state[0]}}</a>
+                    </div>
+                </ng-container>
+                <!-- <div class="col-12">
+                    <button class="btn btn-outline-my-orange mt-1"
+                        (click)="toggleStates()">{{showingMore? 'Menos':'Mais'}}
+                        Estados<i class="fal fa-chevron-{{showingMore? 'up':'down'}} ml-3"></i></button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="footer-item">
+                    <h4 class="p-0">Medicamentos</h4>
+                    <ul>
+                        <li><a class="p-0" href="/medicamentos-de-A-a-Z">Bulas de Medicamentos</a></li>
+                        <li><a class="p-0" href="/saude-de-A-a-Z">Saúde de A a Z</a></li>
+                        <!-- <li><a href="#">Medicamentos por Categoria</a></li>
+                        <li><a href="#">Classes Terapêuticas</a></li>
+                        <li><a href="#">Princípios Ativos</a></li>
+                        <li><a href="#">Farmácia Popular</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="footer-item">
+                    <h4 class="p-0">Farmácias</h4>
+                    <ul>
+                        <li><a class="p-0" href="/farmacias-e-drogarias">Farmácias por Região</a></li>
+                        <!-- <li><a href="#">Medicamentos por Categoria</a></li>
+                        <li><a href="#">Classes Terapêuticas</a></li>
+                        <li><a href="#">Princípios Ativos</a></li>
+                        <li><a href="#">Farmácia Popular</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="footer-item">
+                    <h4 class="p-0">Perfumaria</h4>
+                    <ul>
+                        <li><a class="p-0" href="/produtos-de-A-a-Z">Índice de Produtos</a></li>
+                        <!-- <li><a href="#">Medicamentos por Categoria</a></li>
+                        <li><a href="#">Classes Terapêuticas</a></li>
+                        <li><a href="#">Princípios Ativos</a></li>
+                        <li><a href="#">Farmácia Popular</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="footer-item">
+                    <h4 class="p-0">Blog</h4>
+                    <ul>
+                        <li><a class="p-0" href="/blog">Revista FarmáciaAí</a></li>
+                        <!-- <li><a href="#">Medicamentos por Categoria</a></li>
+                        <li><a href="#">Classes Terapêuticas</a></li>
+                        <li><a href="#">Princípios Ativos</a></li>
+                        <li><a href="#">Farmácia Popular</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="col-lg-3 col-md-3">
+                <div class="footer-item">
+                    <h4 class="mobile-foot">Beleza & Saúde</h4>
+                    <ul>
+                        <li><a href="#">Protetor Solar e Bronzeador</a></li>
+                        <li><a href="#">Fralda</a></li>
+                        <li><a href="#">Maquiagem</a></li>
+                        <li><a href="#">Teste de Gravidez</a></li>
+                        <li><a href="#">Pet Shop</a></li>
+                    </ul>
+                </div>
+            </div> -->
+            <!-- <div class="col-lg-3 col-md-3">
+                <div class="footer-item">
+                    <h4 class="mobile-foot">Consulta Remédios</h4>
+                    <ul>
+                        <li><a href="#">Quem Somos</a></li>
+                        <li><a href="#">Minuto Saudável</a></li>
+                        <li><a href="#">Fabricantes</a></li>
+                        <li><a href="#">Lojas</a></li>
+                        <li><a href="#">Dicionário de Termos</a></li>
+                    </ul>
+                </div>
+            </div> -->
+            <div class="col-lg-3 col-md-3">
+                <div class="footer-item">
+                    <h4 class="p-0">Ajuda</h4>
+                    <ul>
+                        <!-- <li><a href="#">Suporte</a></li>
+                        <li><a href="#">Perguntas Frequentes</a></li> -->
+                        <li><a class="p-0" href="/contato">Fale Conosco</a></li>
+                    </ul>
+                    <!-- <ul class="footer-social">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<section id="cpryt">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center py-3">
+                <a href="#">&copy;2019 O FarmáciaAí é um produto WebFarmas - Todos os direitos reservados</a>
+            </div>
+        </div>
+    </div>
+</section>
+<ngb-toast *ngIf="showBuyOnline" header="Compre online nas farmácias da sua região!" 
+    class="fixed-bottom m-auto w-100" [autohide]="false"
+    (hide)="hideBuyOnline()">
+    <div class="text-center">
+        <a [routerLink]="[ '/']" class="btn btn-my-orange m-4 p-3 rounded-pill gtm-comprar-online-float">COMPRAR ONLINE</a>
+    </div>
+</ngb-toast>
+<ngb-toast *ngIf="false && showAppStores" header="Baixe nosso aplicativo!" class="fixed-bottom m-auto w-100" [autohide]="false"
+    (hide)="hideAppStores()">
+    <div class="text-center">
+        <a class="d-inline-block gtm-play-store" href='https://play.google.com/store/apps/details?id=br.com.farmaciaai.app&utm_source=farmaciaai&utm_
+            campaign=website&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+            <img alt='Disponível no Google Play' style="width: 140px;"
+                src='https://play.google.com/intl/en_us/badges/static/images/badges/pt-br_badge_web_generic.png' />
+        </a>
+        <a class="d-inline-block gtm-app-store"
+            href="https://apps.apple.com/br/app/farm%C3%A1ciaa%C3%AD/id1507805649?mt=8">
+            <img alt='Disponível na App Store' style="width: 130px;"
+                src='https://linkmaker.itunes.apple.com/pt-br/badge-lrg.svg?releaseDate=2020-04-18&kind=iossoftware&bubble=ios_apps' />
+        </a>
+    </div>
+</ngb-toast>

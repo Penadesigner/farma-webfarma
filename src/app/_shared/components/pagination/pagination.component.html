@@ -1,0 +1,14 @@
+<ul id="page" class="justify-content-center pagination pagination-sm">
+    <li *ngFor="let p of pages" class="page-item" [class.active]="p[0] == page">
+        <ng-container *ngIf="mode == 'queryParams'; else elseTemplate">
+            <a class="page-link" [routerLink]="[baseURL]" [queryParams]="getPageQueryParams(p[0])" [fragment]="fragment">{{p[1]}}</a>
+            <!-- <a class="page-link" 
+                href="{{[baseURL, getPageQueryParams(p[0])] | prepareUri : 'keepSlashes'}}">{{p[1]}}</a> -->
+        </ng-container>
+        <ng-template #elseTemplate>
+            <a class="page-link" href="{{[baseURL + p[0], queryParams] | prepareUri : 'keepSlashes'}}">{{p[1]}}</a>
+        </ng-template>
+
+
+    </li>
+</ul>
