@@ -11,7 +11,7 @@
     "compile:bootstrap": "node-sass .\\scss\\custom-bootstrap.scss .\\src\\assets\\css\\bootstrap.min.css",
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server",
-    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:ssr": "npm run build:client-and-server-bundles:prod && npm run compile:server",
     "build:ssr:prod": "npm run build:client-and-server-bundles:prod && npm run compile:server && npm run pack-dist",
     "build:client-and-server-bundles": "ng build && ng run farmaciaai-angular:server --bundleDependencies all",
     "build:client-and-server-bundles:prod": "ng build --prod && ng run farmaciaai-angular:server:production --bundleDependencies all",

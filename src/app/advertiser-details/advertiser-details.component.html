@@ -62,52 +62,57 @@
                 <i class="fas fa-phone mr-1"></i>
                 VER TELEFONE</button>
             <ng-template #popContent>
-                <div class="text-center">
-                    <span class="h6">Encontre os <span class="text-my-orange">melhores preços na região</span>, <span
-                            class="text-my-orange">receba em minutos
-                        </span> e
-                        <span class="text-my-orange">pague na entrega</span>
-                    </span>
-                    <br><br>
-                    <a [routerLink]="['/']"
-                        class="btn btn-my-orange box-shadow--3dp text-white family-bold rounded-pill py-3 w-100 gtm-comprar-online-farmacia-vtelefone">
-                        <i class="fal fa-search-dollar mr-1 h5 m-0"></i>
-                        PEÇA ONLINE
-                    </a>
-                    <hr>
-                    <div *ngIf="phone && phone != 'invalid'">
-                        <span class="h6">Verifique se a farmácia é parceira <span class="text-my-orange">FarmáciaAí
-                            </span>
-                            e utilize o <span class="text-my-orange">cupom abaixo</span>
-                        </span>
-                        <br><br>
-                        <button class="btn btn-light border-dark disabled" style="border-style: dashed;">
-                            <i class="fa fa-cut"></i>
-                            FARMACIA.AI20
-                        </button>
-                        <br><br>
-                    </div>
-                    <!-- <a *ngIf="phone && phone != 'invalid'" href="tel:{{phone}}"
-                        class="text-nowrap text-center h6 gtm-ligar">
-                        <span class="d-block">{{phone}}</span><br>
-                        <button class="btn btn-my-green btn-block">
-                            <i class="fas fa-phone mr-1"></i>
-                            Ligar
-                        </button>
-                    </a> -->
-                    <a *ngIf="googlePlacesUrl && googlePlacesUrl != 'Error'" [href]="googlePlacesUrl"
-                        class="btn btn-my-green btn-block">
-                        <i class="fas fa-phone mr-1"></i>
-                        Acessar Telefone
-                    </a>
-                    <span *ngIf="googlePlacesUrl && googlePlacesUrl == 'Error'">
-                        Telefone Indisponível
-                    </span>
-                    <span *ngIf="!googlePlacesUrl">
-                        Carregando telefone...
-                    </span>
-                </div>
-            </ng-template>
+  <div class="p-3">
+    <div class="bg-white rounded-lg shadow p-4 mx-auto" style="max-width: 28rem;">
+      <h1 class="h3 font-weight-bold text-center text-purple mb-3">
+        Não perca seu <span class="border-bottom border-purple">Desconto!</span>
+      </h1>
+
+      <p class="h5 text-muted text-center mb-4">
+        Obtenha até <strong>60% de desconto</strong> em medicamentos e muito mais!
+      </p>
+
+      <div class="bg-light rounded p-3 mb-4 text-center">
+        <p class="h5 font-weight-bold text-dark mb-2">
+          <span class="text-purple display-4 align-middle">+</span> Clude Saúde Acesso
+        </p>
+        <p class="h6 font-weight-bold text-muted">
+          R$4,90/mês ou R$39,90/ano
+        </p>
+      </div>
+
+      <ul class="list-unstyled text-muted mb-4">
+        <li class="mb-2">
+          <span class="text-purple">•</span> Até <strong>60% de desconto</strong> em medicamentos.
+        </li>
+        <li class="mb-2">
+          <span class="text-purple">•</span> Consultas de <del>R$90,00</del> por <strong class="text-success">R$45,00</strong>.
+        </li>
+        <li class="mb-2">
+          <span class="text-purple">•</span> <strong>50% de desconto</strong> no Pronto Atendimento Digital.
+        </li>
+        <li class="mb-2">
+          <span class="text-purple">•</span> Chat médico <strong class="text-primary">gratuito</strong>.
+        </li>
+        <li class="mb-2">
+          <span class="text-purple">•</span> Monitoramento contínuo de saúde <strong class="text-success">sem custo</strong>.
+        </li>
+        <li class="mb-2">
+          <span class="text-purple">•</span> Descontos em exames.
+        </li>
+        <li class="mb-2">
+          <span class="text-purple">•</span> Nutrição e psicologia com <strong>+50% de desconto</strong>.
+        </li>
+      </ul>
+
+      <div class="text-center">
+        <button class="btn btn-purple font-weight-bold px-4 py-2 border border-danger border-dashed">
+          Garanta o Desconto
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
         </div>
         <div *ngIf="storesRanking?.length" class="mt-3">
             <h5 class="text-center">Melhores farmácias online próximas</h5>
