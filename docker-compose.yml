@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   farmaciaaiangular:
     image: farmaciaaiangular
@@ -7,10 +9,4 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 5001:5000
-    networks:
-      - pgnet
-
-networks:
-  pgnet:
-    external: true
+      - 5001:4000

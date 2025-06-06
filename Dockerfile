@@ -21,6 +21,6 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server.ts ./server.ts
 COPY --from=builder /app/node_modules ./node_modules
 
-EXPOSE 5000
+EXPOSE 4000
 
 CMD ["node", "dist/server"]
