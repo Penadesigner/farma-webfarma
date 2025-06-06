@@ -1,0 +1,50 @@
+footer {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.footer-item h4 {
+  font-family: mont-semibold;
+  font-size: 18px;
+  color: #002E4D;
+  padding-bottom: 15px;
+}
+
+.footer-item ul li a {
+  font-family: mont-regular;
+  font-size: 16px;
+  color: #A2A2A2;
+  padding-top: 20px;
+  display: block;
+}
+
+.footer-social li {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.footer-social li a {
+  padding-top: 10px !important;
+}
+
+.footer-social li a i {
+  font-size: 18px;
+  color: #328DC9;
+}
+
+#cpryt a {
+  font-family: mont-bold;
+  /* font-size: 14px; */
+  color: #328DC9;
+  /* line-height: 50px; */
+}
+
+:host ::ng-deep .toast-header {
+  color: var(--my-orange);
+}
+
+:host ::ng-deep .toast-body {
+  padding: 0;
+}

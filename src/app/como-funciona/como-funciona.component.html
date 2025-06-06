@@ -1,0 +1,21 @@
+<section id="como-funciona">
+    <ng-container *ngFor="let item of items; let i=index">
+        <div class="w-100 p-5" [class.bg-light]="i%2">
+            <div class="d-md-flex flex-row justify-content-center" [class.flex-md-row-reverse]="i%2">
+                <!-- BRIEF-->
+                <div class="align-items-center col-md-6 col-xl-5 d-flex flex-column text-center">
+                    <!-- SECTION TITLE-->
+                    <h2 class="mb-3 mt-4 text-md-left w-100">{{item.title}}</h2>
+                    <div class="border-my-orange border-top w-50 mr-md-auto"></div>
+                    <p class="my-5">{{item.desc}}</p>
+                </div><!-- /ENDBRIEF-->
+                <!-- PHONES IMAGE-->
+                <div class="col-8 col-lg-4 col-md-6 col-xl-3 mx-auto mx-md-0">
+                    <div class="d-flex flex-row justify-content-end" [class.flex-md-row-reverse]="i%2">
+                        <img src="/assets/img/{{item.img}}">
+                    </div>
+                </div><!-- /END PHONES IMAGE-->
+            </div><!-- /END ROW-->
+        </div><!-- /END CONTAINER-->
+    </ng-container>
+</section>

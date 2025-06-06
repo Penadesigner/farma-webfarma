@@ -1,0 +1,22 @@
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid #42A948;
+    /* green */
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+    /* red */
+}
+
+.modal-body {
+    background-image: linear-gradient(236deg, #ff0350, #ff4a03);
+}
+
+.close {
+    opacity: 1;
+    font-size: 2.5rem;
+}
+
+.close span {
+    color: var(--white);
+}

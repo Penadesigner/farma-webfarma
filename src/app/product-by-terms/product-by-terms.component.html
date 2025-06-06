@@ -1,0 +1,67 @@
+<section id="product-by-terms" class="pt-2 pt-sm-3">
+    <app-breadcrumb [items]="[['Saúde de A a Z', '/saude-de-A-a-Z'],[term.nome, null]]"></app-breadcrumb>
+    <div class="container terms-description" *ngIf="term.fonte=='SAUDE_GOV'">
+        <div class="row">
+            <div class="col-lg-7 col-md 6 col-12" [innerHtml]="term.descricao"></div>
+            <div class="col-12 small">
+                Fonte: <a [href]="term.url">{{term.url}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md 6 col-12">
+                <div class="product-details-desp">
+                    <h6 class="my-3 d-none d-md-block">Resultados para:</h6>
+                    <h4 class="my-3 my-md-0 family-bold">"{{term.nome | lowercase}}"</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="pro-de-grid">
+    <div class="container">
+        <div class="row mt-xl-5">
+            <div *ngIf="products?.length > 0" class="col-lg-12 text-center middle-text p-3">
+                <h3 class="text-my-light family-bold font-italic">
+                    Produtos Encontrados</h3>
+            </div>
+            <div *ngIf="!products?.length" class="my-3 my-md-0 family-bold">
+                Nenhum resultado encontrado. Verifique se o produto está escrito corretamente.
+            </div>
+            <ng-container *ngFor="let product of products">
+                <div class="col-lg-3 col-md-6 mb-3 px-1">
+                    <div class="d-flex flex-column grid-item h-100 justify-content-between text-center">
+                        <h6>{{product.nomeCurto | titlecase}}</h6>
+                        <ul class="features text-lg-left mt-2 small">
+                            <li *ngIf="product.detalhes.principio"><i
+                                    class="fal fa-flask-potion text-my-lgreen mr-1"></i>
+                                {{product.detalhes.principio | titlecase}}
+                            </li>
+                            <li *ngIf="product.marca" class="d-block">
+                                <i class="fal fa-industry-alt text-my-lgreen mr-1"></i>{{product.marca | titlecase}}
+                            </li>
+                        </ul>
+                        <div class="text-left small">
+                            <i class="fa fa-quote-left small"></i>
+                            ...<span [innerHtml]="product.descricao">
+                            </span>...
+                            <i class="fa fa-quote-right small"></i>
+                        </div>
+                        <div>
+                            <div *ngIf="product.avgPrice" class="price-box mb-3 mt-2">
+                                <p>Preço médio: <span class="d-inline-block">R$
+                                        {{product.avgPrice | number : '1.2-2'}}</span></p>
+                            </div>
+                            <a class="py-3"
+                                [routerLink]="['/bula', product.nomeCurto+'-'+product.marca | prepareUri, product.detalhes.registro.substring(0,9)]">
+                                Ver mais
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>

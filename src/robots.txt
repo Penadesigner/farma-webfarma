@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.farmaciaai.com.br/sitemap.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_1_1.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_1_2.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_2_1.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_2_2.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_3_1.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_3_2.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_4_1.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_4_2.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_5_1.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_5_2.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_6_1.xml
+Sitemap: https://www.farmaciaai.com.br/sitemap_4449874_6_2.xml

@@ -1,0 +1,83 @@
+<section id="product-details" class="pt-2 pt-sm-3">
+    <div class="page-path pb-2 pb-sm-4 pl-4 small">
+        <a href="/">Home</a>&nbsp;<i class="fas fa-chevron-right"></i>&nbsp;<span>Resultado da Busca</span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md 6 col-12">
+                <div class="product-details-desp">
+                    <h6 class="my-3 d-none d-md-block">Resultados para:</h6>
+                    <h4 class="my-3 my-md-0 family-bold">"{{keywords | lowercase}}"</h4>
+                    <!-- <div class="price-box py-2">
+                        <p>Encontrado em <span>{{10}}
+                                <ng-container [ngPlural]="10">
+                                    <ng-template ngPluralCase="=0">Lojas</ng-template>
+                                    <ng-template ngPluralCase="=1">Loja</ng-template>
+                                    <ng-template ngPluralCase="other">Lojas</ng-template>
+                                </ng-container>
+                            </span></p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="pro-de-grid">
+    <div class="container">
+        <div class="row mt-xl-5">
+            <div *ngIf="loaded && products?.length > 0" class="col-lg-12 text-center middle-text p-3">
+                <h3 class="text-my-light family-bold font-italic">
+                    Produtos Encontrados</h3>
+            </div>
+            <div *ngIf="loaded &&  !products?.length" class="my-3 my-md-0 family-bold">
+                Nenhum resultado encontrado. Verifique se o produto está escrito corretamente.
+            </div>
+            <div *ngIf="!loaded" class="my-3 my-md-0 family-bold">
+                Aguarde...
+                <div class="spinner-border text-my-light" role="status">
+                    <span class="sr-only">Aguarde...</span>
+                </div>
+            </div>
+            <ng-container *ngFor="let product of products">
+                <div class="col-lg-3 col-md-6 mb-3 px-1" (click)="onSelect(product)">
+                    <div class="d-flex flex-column grid-item h-100 justify-content-between text-center">
+                        <div class="align-items-center d-flex flex-column h-100 justify-content-center">
+                            <img [src]="'https://images.webfarmas.com.br/'+ product.ean + '.jpg'" alt="{{product.ean}}"
+                                class="vh-40 p-1">
+                        </div>
+                        <h6>{{product.nomeCurto | titlecase}}</h6>
+                        <small>
+                            <p class="">{{product.nomeCompleto.replace(product.nomeCurto,'')}}</p>
+                        </small>
+                        <!-- <ul class="tags">
+                            <li>Categoria 1</li>
+                            <li>Categoria 1</li>
+                            <li>Categoria 1</li>
+                        </ul> -->
+                        <ul class="features text-lg-left mt-2 small">
+                            <li *ngIf="product.detalhes.principio"><i
+                                    class="fal fa-flask-potion text-my-lgreen mr-1"></i>
+                                {{product.detalhes.principio | titlecase}}
+                            </li>
+                            <li *ngIf="product.marca">
+                                <i class="fal fa-industry-alt text-my-lgreen mr-1"></i>{{product.marca | titlecase}}
+                            </li>
+                        </ul>
+                        <div>
+                            <div *ngIf="product.avgPrice" class="price-box mb-3">
+                                <p>Preço médio de <span>R$ {{product.avgPrice | number : '1.2-2'}}</span></p>
+                            </div>
+                            <a class="py-3"
+                                [href]="'/detalhes/' + prepareUriPipe.transform(product.nomeCompleto) +'/'+ product.ean">
+                                Comparar Preços
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>
+
+<app-category-list [isFloating]="false"></app-category-list>

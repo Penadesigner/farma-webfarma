@@ -1,0 +1,22 @@
+<section id="product-details" style="height: 70vh;" class="d-flex align-items-center">
+    <div *ngIf="advertiser" class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 col-md-8 col-lg-6">
+                <div class="d-flex justify-content-center">
+                    <img [src]="advertiser.netGroup.urlLogo" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center align-self-stretch">
+            <div class="col-12 text-center">
+                <div>
+                    <h2 class="mb-2">{{advertiser.advertiserDto.name}}</h2>
+                    <h5 class="my-3 text-my-green family-bold ">Redirecionando para a loja da Farmácia...</h5>
+                    <div class="spinner-border text-my-light" role="status">
+                        <span class="sr-only">Carregando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

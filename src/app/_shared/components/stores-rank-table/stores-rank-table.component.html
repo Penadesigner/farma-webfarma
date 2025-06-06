@@ -1,0 +1,36 @@
+<table class="table table-striped table-sm text-center mb-0 border">
+    <thead class="thead-dark">
+        <tr class="border border-dark">
+            <th scope="col">#</th>
+            <th scope="col">Plano</th>
+            <th scope="col">Farmácia</th>
+            <th scope="col">Pontos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let store of stores; let i=index">
+            <tr>
+                <th scope="row" class="align-middle" [class.text-my-orange]="i < 3">{{i + 1}}</th>
+                <td class="align-middle">
+                    <i [class]="getBadgeStyle(store.category)"></i>
+                    <span class="small d-block">{{store.category}} </span>
+                </td>
+                <td>
+                    <a href="{{['/farmacia-online',
+                    store.address.state, store.address.locality, store.address.neighbourhood,
+                    store.nameUri].join('/') | prepareUri : 'keepSlashes'}}">
+                        <span class="d-block">{{store.name | titlecase}}</span>
+                        <span class="d-block small">{{store.address.locality}} - {{store.address.neighbourhood}}</span>
+                        <span class="small">{{store.address.street}}</span>
+                    </a>
+                </td>
+                <td class="align-middle">{{store.score}}</td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+<p class="text-center mt-2">
+    <a [routerLink]="[ '/planos']">
+        <button class="btn btn-outline-info btn-block">Entenda as pontuações</button>
+    </a>
+</p>
